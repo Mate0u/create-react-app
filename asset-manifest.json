@@ -1,14 +1,14 @@
 {
-  "main.css": "/react-card-validation-app/static/css/main.22557eb0.chunk.css",
-  "main.js": "/react-card-validation-app/static/js/main.763f05c6.chunk.js",
-  "main.js.map": "/react-card-validation-app/static/js/main.763f05c6.chunk.js.map",
-  "static/js/1.2dd891c4.chunk.js": "/react-card-validation-app/static/js/1.2dd891c4.chunk.js",
-  "static/js/1.2dd891c4.chunk.js.map": "/react-card-validation-app/static/js/1.2dd891c4.chunk.js.map",
-  "runtime~main.js": "/react-card-validation-app/static/js/runtime~main.c5b9ba2a.js",
-  "runtime~main.js.map": "/react-card-validation-app/static/js/runtime~main.c5b9ba2a.js.map",
-  "static/media/logo.svg": "/react-card-validation-app/static/media/logo.5d5d9eef.svg",
-  "static/css/main.22557eb0.chunk.css.map": "/react-card-validation-app/static/css/main.22557eb0.chunk.css.map",
-  "index.html": "/react-card-validation-app/index.html",
-  "precache-manifest.1ebd19d4f85e84446650c1f18a7171d7.js": "/react-card-validation-app/precache-manifest.1ebd19d4f85e84446650c1f18a7171d7.js",
-  "service-worker.js": "/react-card-validation-app/service-worker.js"
+  "main.css": "/create-react-app/static/css/main.22557eb0.chunk.css",
+  "main.js": "/create-react-app/static/js/main.db381aab.chunk.js",
+  "main.js.map": "/create-react-app/static/js/main.db381aab.chunk.js.map",
+  "static/js/1.2dd891c4.chunk.js": "/create-react-app/static/js/1.2dd891c4.chunk.js",
+  "static/js/1.2dd891c4.chunk.js.map": "/create-react-app/static/js/1.2dd891c4.chunk.js.map",
+  "runtime~main.js": "/create-react-app/static/js/runtime~main.1d626e9e.js",
+  "runtime~main.js.map": "/create-react-app/static/js/runtime~main.1d626e9e.js.map",
+  "static/media/logo.svg": "/create-react-app/static/media/logo.5d5d9eef.svg",
+  "static/css/main.22557eb0.chunk.css.map": "/create-react-app/static/css/main.22557eb0.chunk.css.map",
+  "index.html": "/create-react-app/index.html",
+  "precache-manifest.924a9880f9d82b021b61e17f6b852692.js": "/create-react-app/precache-manifest.924a9880f9d82b021b61e17f6b852692.js",
+  "service-worker.js": "/create-react-app/service-worker.js"
 }
