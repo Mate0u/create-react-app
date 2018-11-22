@@ -1,28 +1,73 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
-  }
+class App extends React.Component {
+	constructor(props) {
+	super(props);
+	
+	this.state = { 
+		actualInputValue: null,
+		valueToOutput: null
+		};
+	}
+	
+	onButtonClickSet() {
+	this.setState(state => ({ valueToOutput: state.actualInputValue }));
+	}
+	valueChange(event) {
+	this.setState({actualInputValue: event.target.value});
+	}
+	
+render() {
+return (
+	<div>
+		<div>
+			
+			<div><text>Input card number ></text><input type="number" onChange={this.valueChange.bind(this)} /></div>
+			<div><button onClick={this.onButtonClickSet.bind(this)}>Send</button></div>
+			{this.state.valueToOutput && <Child value={this.state.valueToOutput} />}
+		</div>
+	</div>
+);
 }
+}
+		class Child extends React.Component{
+			constructor (props) {
+			super (props);
+			this.state = {
+				previous: Number(this.props),
+				current: Number(this.props),
+				lenghtOfNumber: null
+			};
+			}
+	
+			componentWillReceiveProps(nextProps) {
+				if (nextProps.value != this.state.fromParent) {
+				this.setState({
+					previous: Number(nextProps.value),
+					current: Number(nextProps.value),
+				})
+				}
+			}
+	
+			onButtonClickPlus() {
+			const cos = this.state.lenghtOfNumber.toString();
+			if(cos.length === 1){
+				return(
+					<output>Lenght of card number is ok</output>
+				);
+			}
+			}
+	
+			render() {
+				return (
+				<div>
+				<output>Output:{this.state.previous}</output>
+				<div><button onClick={this.onButtonClickPlus.bind(this)}>Validate</button></div>
+				</div>
+			);
+			}
+		}
+	
 
 export default App;
