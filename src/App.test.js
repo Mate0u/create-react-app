@@ -3,43 +3,35 @@ import { shallow } from 'enzyme';
 import App from './App';
 import usersList from './App';
 
-
 it('renders without crashing', () => {
   shallow(<App />);
 });
-it('includes input', () => {
-	const app = shallow(<App />);
-	expect(app.containsMatchingElement(<input />)).toEqual(true)
-  });
+/*
+https://typeofweb.com/2018/02/13/testowanie-react-js-enzyme-props-state-interakcje/
+Po kolei: Renderuje się aplikacja. 
+Następnie upewniam się, że lista kontaktów jest taka, jak mi się wydaje, że jest (to krok w sumie zbędny).
+Następnie symuluję zdarzenie input i ponownie sprawdzam listę kontaktów — teraz jest już inna.
+*/
+it('filters names on input', () => {
+    const app = shallow(<App />);
+    expect(app.find('UsersList').prop('users')).toEqual(['Michal', 'Kasia', 'Jacek', 'Marta', 'Tomek', 'Ania']);
   
-  it('includes usersList', () => {
-	const app = shallow(<App />);
-	expect(app.containsMatchingElement(<usersList />)).toEqual(true)
+    app.find('input').simulate('input', {currentTarget: {value: 'M'}})
+    expect(app.find('UsersList').prop('users')).toEqual(['Michal', 'Marta', 'Tomek']);
   });
 
-  it('shows message when there are no users', () => {
-    const usersList = shallow(<usersList users={[]} />);
-    expect(usersList.text()).toContain('No results!')
-});
+it('filters names on input', () => {
+    const app = shallow(<App />);
+    expect(app.find('UsersList').prop('users')).toEqual(['Michal', 'Kasia', 'Jacek', 'Marta', 'Tomek', 'Ania']);
+  
+    app.find('input').simulate('input', {currentTarget: {value: ''}})
+    expect(app.find('UsersList').prop('users')).toEqual(['Michal', 'Kasia', 'Jacek', 'Marta', 'Tomek', 'Ania']);
+  });
 
-it(`doesn't show message when there are users`, () => {
-    const usersList = shallow(<usersList users={['Michal']} />);
-    expect(usersList.text()).not.toContain('No results!')
-});
-
-it(`shows a list of users`, () => {
-    const users = ['Michal', 'Ania'];
-    const usersList = shallow(<usersList users={users} />);
-    expect(usersList.find('li').length).toEqual(users.length);
-}); 
-
-describe('list of users', () => {
-    const users = ['Michal', 'Ania'];
-    const usersList = shallow(<usersList users={users} />);
-    
-    users.forEach(user => {
-        it(`includes name ${user} on the list`, () => {
-            expect(usersList.containsMatchingElement(<li>{user}</li>)).toEqual(true)
-        });
-    });
-});
+  it('filters names on input', () => {
+    const app = shallow(<App />);
+    expect(app.find('UsersList').prop('users')).toEqual(['Michal', 'Kasia', 'Jacek', 'Marta', 'Tomek', 'Ania']);
+  
+    app.find('input').simulate('input', {currentTarget: {value: 'K'}})
+    expect(app.find('UsersList').prop('users')).toEqual(['Kasia', 'Jacek','Tomek']);
+  });
