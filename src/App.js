@@ -1,17 +1,16 @@
 import React from 'react';
-import './App.css';
-import cardValidatorAll from './components/cardValidatorAll.js'
-
+// import './App.css';
+import BannerUpper from './components/bannerUpper';
 class App extends React.Component {
 
 render() {
 return (
-	<div className = "container">
-		<cardValidatorAll />
+	<div>
+		<BannerUpper />
 	</div>
 );
 }
+
+
 }
-
-
 export default App;
