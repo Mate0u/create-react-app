@@ -1,5 +1,5 @@
 import React from 'react';
-// import './App.css';
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
 import BannerUpper from './components/bannerUpper';
 class App extends React.Component {
 
