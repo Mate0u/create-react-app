@@ -1,27 +1,37 @@
 import React from 'react';
-import Navbar from 'react-bootstrap/Navbar';
-import Nav from 'react-bootstrap/Nav';
-import '../../node_modules/bootstrap/dist/css/bootstrap.min.css'
+import { Nav, Navbar, NavItem } from "react-bootstrap";
+import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import Routes from './Routes';
+import { BrowserRouter as Router, Route, Link, NavLink } from "react-router-dom";
+import Home from "./homePage";
+import Card from './cardValidatorAll';
 
 
 const BannerUpper = () => (
 <div className = "container">
 <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-<Navbar.Brand href="#home">
-	<img
-		alt=""
-		src="https://bcassetcdn.com/asset/logo/0fa296a8-522e-4f65-8def-e53554b80db7/logo?v=4&text=Mate0u"
-		width="30"
-		height="30"
-		className="d-inline-block align-top"
-	/>
-	{'Ex QA'}
-</Navbar.Brand>
+<Navbar.Brand href="/">
 	<Nav className="mr-auto">
-		<Nav.Link to="/home">Home</Nav.Link>
-		<Nav.Link to="/card">Credit card validation</Nav.Link>
+		<NavItem to="/">Ex QA</NavItem>
 	</Nav>
+</Navbar.Brand>
 </Navbar>
+<Router>
+      <div>
+        <nav>
+          <ul>
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+            <li>
+              <Link to="/card">About</Link>
+            </li>
+          </ul>
+        </nav>
+        <Route path="/" exact component={Home} />
+        <Route path="/card" component={Card} />
+      </div>
+    </Router>
 </div>
 );
 
