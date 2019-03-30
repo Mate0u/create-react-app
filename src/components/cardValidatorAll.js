@@ -1,5 +1,6 @@
 import React from 'react';
 import '../App.js';
+import InputCard from'../components/cardValidatorComponents/input'
 
 const luhn = require("luhn");
 
@@ -18,8 +19,7 @@ class Child extends React.Component{
 			resultCheckSum: null,
 			resultBrand: null,
 			actualInputValue: null,
-		valueToOutput: null,
-		informationCardNumberLenght: null
+		valueToOutput: null
 		};
 	}
 	
@@ -55,9 +55,7 @@ class Child extends React.Component{
 		//Checking id card number have 16 digits
 		if(this.state.current.toString().length === 16){
 			this.setState({informationCardNumberLenght: "Card Number has a good length"});
-			this.setState({
-				value: this.state.resultLenght = 'true',
-			});
+			this.setState({resultLenght: 'true'});
 		} else {
 			this.setState({informationCardNumberLenght: "Card Number has not a good length"});
 			this.setState({
@@ -130,30 +128,39 @@ class Child extends React.Component{
 		};
 	}
 	
+		// render() {
+		// 	return (
+		// 	<div>
+		// 		<div>
+		// 			<div><output>Input card number ></output><input type="number" onChange={this.valueChange.bind(this)}/><button onClick={this.onButtonClickSet.bind(this)}>Send</button></div>
+		// 			<div><output>{this.state.informationCardNumberLenght}</output></div>
+		// 			{this.state.valueToOutput && <Child value={this.state.valueToOutput} />}
+		// 		</div>
+		// 		<div>
+		// 			<output>Output:{this.state.current}</output>
+		// 			<div>
+		// 				<button onClick={this.onButtonCardLengthValidation.bind(this)}>Validate card length</button>
+		// 				<button onClick={this.onButtonCardNumberValidation.bind(this)}>Validate card number</button>
+		// 				<button onClick={this.onButtonCardBrandValidation.bind(this)}>Validate card brand</button>
+		// 				<button onClick={this.allValidateInOne.bind(this)}>Validate card</button>
+		// 			</div>
+		// 		<div><output>{this.state.informationCardNumberNotCorrect}</output></div>
+		// 		<div><output>{this.state.informationCardNumberLenght}</output></div>
+		// 		<div><output>{this.state.informationBrand}</output></div>
+		// 		<div><output>{this.state.informationCheckSum}</output></div>
+		// 		</div>
+		// 	</div>
+		// )
+		// }
+
+
 	render() {
-		return (
+	return (
 		<div>
-				<div>
-					<div><output>Input card number ></output><input type="number" onChange={this.valueChange.bind(this)}/><button onClick={this.onButtonClickSet.bind(this)}>Send</button></div>
-					<div><output>{this.state.informationCardNumberLenght}</output></div>
-					{this.state.valueToOutput && <Child value={this.state.valueToOutput} />}
-				</div>
-				<div>
-					<output>Output:{this.state.current}</output>
-					<div>
-						<button onClick={this.onButtonCardLengthValidation.bind(this)}>Validate card length</button>
-						<button onClick={this.onButtonCardNumberValidation.bind(this)}>Validate card number</button>
-						<button onClick={this.onButtonCardBrandValidation.bind(this)}>Validate card brand</button>
-						<button onClick={this.allValidateInOne.bind(this)}>Validate card</button>
-					</div>
-				<div><output>{this.state.informationCardNumberNotCorrect}</output></div>
-				<div><output>{this.state.informationCardNumberLenght}</output></div>
-				<div><output>{this.state.informationBrand}</output></div>
-				<div><output>{this.state.informationCheckSum}</output></div>
-				</div>
+			<InputCard />
 		</div>
 	)
 	}
-	}
 
-	export default Child;
+}
+export default Child;
