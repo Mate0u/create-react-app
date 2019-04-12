@@ -1,9 +1,6 @@
 import React from 'react';
 import { Nav, Navbar, NavItem } from "react-bootstrap";
 import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import Home from "./homePage";
-import Card from './cardValidatorAll';
 
 
 const BannerUpper = () => (
@@ -15,22 +12,6 @@ const BannerUpper = () => (
 	</Nav>
 </Navbar.Brand>
 </Navbar>
-<Router>
-      <div>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/card">Card</Link>
-            </li>
-          </ul>
-        </nav>
-        <Route path="/" exact component={Home} />
-        <Route path="/card" component={Card} />
-      </div>
-    </Router>
 </div>
 );
 

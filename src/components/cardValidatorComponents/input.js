@@ -1,4 +1,6 @@
 import React from 'react';
+import DisplayCard from "./display";
+import PreviousDisplayCard from "./inputPrevious";
 
 class InputCard extends React.Component{
 
@@ -6,7 +8,8 @@ constructor (props) {
 super (props);
 this.state = {
 	actualInputValue: null,
-	informationCardNumberLenght: null
+	informationCardNumberLenght: null,
+	previousActualInputValue: null
 };
 }
 
@@ -19,6 +22,7 @@ onButtonClickSet() {
 		this.setState({informationCardNumberLenght: "Please input card number!"});
 	}
 	this.setState(state => ({ valueToOutput: state.actualInputValue }));
+	this.setState(state => ({previousActualInputValue: state.actualInputValue}));
 }
 
 
@@ -27,7 +31,9 @@ return (
 	<div>
 		<output>Input card number ></output>
 		<input type="number" onChange={this.valueChange.bind(this)}/>
-		<button onClick={this.onButtonClickSet.bind(this)}>Send</button>
+		<button onClick={this.onButtonClickSet.bind(this)}>Save</button>
+		<DisplayCard cardNumberToDisplay = {this.state.actualInputValue}/>
+		<PreviousDisplayCard cardNumberToDisplay = {this.state.previousActualInputValue}/>
 	</div>
 )
 }

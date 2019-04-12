@@ -158,6 +158,7 @@ class Child extends React.Component{
 	return (
 		<div>
 			<InputCard />
+			
 		</div>
 	)
 	}
