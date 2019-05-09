@@ -1,6 +1,7 @@
 import React from 'react';
 import DisplayCard from "./display";
 import PreviousDisplayCard from "./inputPrevious";
+import ValidatorsGuiButtons from "./validatorsGUI";
 
 class InputCard extends React.Component{
 
@@ -25,7 +26,6 @@ onButtonClickSet() {
 	this.setState(state => ({previousActualInputValue: state.actualInputValue}));
 }
 
-
 render() {
 return (
 	<div>
@@ -34,6 +34,7 @@ return (
 		<button onClick={this.onButtonClickSet.bind(this)}>Save</button>
 		<DisplayCard cardNumberToDisplay = {this.state.actualInputValue}/>
 		<PreviousDisplayCard cardNumberToDisplay = {this.state.previousActualInputValue}/>
+		<ValidatorsGuiButtons actualInputValue = {this.state.actualInputValue}/>
 	</div>
 )
 }
