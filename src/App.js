@@ -10,27 +10,27 @@ class App extends React.Component {
 
 render() {
 return (
-	<div className="container">
-		<BannerUpper />
-		<div>
-		<Router>
-      <div>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/card">Card</Link>
-            </li>
-          </ul>
-        </nav>
-        <Route path="/" exact component={Home} />
-        <Route path="/card" component={Card} />
-      </div>
-    </Router>
-		</div>
-	</div>
+<div className="container">
+ <BannerUpper />
+  <div>
+   <Router>
+    <div>
+     <nav>
+      <ul>
+       <li>
+        <Link to="/">Home</Link>
+       </li>
+       <li>
+        <Link to="/card">Card</Link>
+       </li>
+      </ul>
+     </nav>
+     <Route path="/" exact component={Home} />
+     <Route path="/card" component={Card} />
+    </div>
+   </Router>
+  </div>
+</div>
 );
 }
 }
