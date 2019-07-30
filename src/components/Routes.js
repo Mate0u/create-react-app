@@ -8,7 +8,7 @@ export default () =>
     <div>
     <Switch>
         <Route path="/" exact component={Home} />
-        <Route path="/card" exact component={Home} />
+        <Route path="/card" exact component={Card} />
     </Switch>
     </div>
 </Router>

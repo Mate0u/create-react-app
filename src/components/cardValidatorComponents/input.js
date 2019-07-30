@@ -21,8 +21,10 @@ valueChange(event) {
 onButtonClickSet() {
  if(this.state.actualInputValue === null){
   this.setState({informationCardNumberLenght: "Please input card number!"});
+ } else {
+  this.setState({informationCardNumberLenght: ""});
  }
-  this.setState(state => ({ valueToOutput: state.actualInputValue }));
+  this.setState(state => ({valueToOutput: state.actualInputValue }));
   this.setState(state => ({previousActualInputValue: state.actualInputValue}));
 }
 
@@ -32,9 +34,10 @@ return (
  <output>Input card number ></output>
  <input type="number" onChange={this.valueChange.bind(this)}/>
  <button onClick={this.onButtonClickSet.bind(this)}>Save</button>
+ <output>{this.state.informationCardNumberLenght}</output>
  <DisplayCard cardNumberToDisplay = {this.state.actualInputValue}/>
  <PreviousDisplayCard cardNumberToDisplay = {this.state.previousActualInputValue}/>
- <ValidatorsGuiButtons actualInputValue = {this.state.actualInputValue}/>
+ <ValidatorsGuiButtons actualInputValue = {this.state.actualInputValue} />
 </div>
 )
 }
