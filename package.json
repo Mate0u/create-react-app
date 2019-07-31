@@ -7,7 +7,7 @@
     "enzyme": "^3.7.0",
     "enzyme-adapter-react-16": "^1.7.0",
     "gh-pages": "2.0.1",
-    "luhn": "^2.3.0",
+    "luhn": "^2.4.0",
     "react": "16.6.3",
     "react-bootstrap": "^1.0.0-beta.5",
     "react-dom": "16.6.3",
