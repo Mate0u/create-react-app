@@ -1,5 +1,4 @@
 import React from "react";
-import MetodValidationLenght from './metodsForValidation/metodValidationLenght';
 
 class validatorsGuiButtons extends React.Component{
 
@@ -12,14 +11,23 @@ this.state = {
 }
 
 onButtonClickSet() {
-if(this.state.infromationAboutCardNumberLenghtValidator === null){
-    this.setState({infromationAboutCardNumberLenghtValidator: "Please valiate"});
+if(this.props.actualInputValue === null){
+ this.setState({infromationAboutCardNumberLenghtValidator: "Please input card number first!"});
 } else {
-    this.setState({infromationAboutCardNumberLenghtValidator: ""});
+ this.setState({infromationAboutCardNumberLenghtValidator: ""});
+ this.MetodValidationLenght();
 }
-    this.setState(state => ({valueToOutput: state.actualInputValue }));
-    this.setState(state => ({previousActualInputValue: state.actualInputValue}));
-    MetodValidationLenght(actualInputValue);
+ this.setState(state => ({valueToOutput: state.actualInputValue }));
+ this.setState(state => ({previousActualInputValue: state.actualInputValue}));
+}
+
+// //Checking if card number have 16 digits
+MetodValidationLenght(){
+if(this.props.actualInputValue.toString().length === 16){
+ this.setState({informationCardNumberLenght: "Card Number has a good length"});
+} else {
+ this.setState({informationCardNumberLenght: "Card Number has not a good length"});
+}
 }
 
 render(){
@@ -27,9 +35,8 @@ return(
 <div>
  <div>
  <button onClick={this.onButtonClickSet.bind(this)}>Validate</button>
- <output>{this.state.informationCardNumberLenght}</output>
-
- {/* <MetodValidationLenght actualInputValue = {this.state.actualInputValue}/> */}
+ <output>{this.state.infromationAboutCardNumberLenghtValidator}</output>
+ <div><output>{this.state.informationCardNumberLenght}</output></div>
  </div>
 </div>
 )
