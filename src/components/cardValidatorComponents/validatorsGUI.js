@@ -7,7 +7,9 @@ constructor (props) {
 super (props);
 this.state = {
  lengthOfCardNumber: 16,
- checkSum: luhn.validate(this.props.actualInputValue),
+ checkSum: null,
+ cardBrand: null,
+ informationBrand: null,
  informationCheckSum: null,
  informationCardNumberLenght: null,
  infromationAboutCardNumberLenghtValidator: null
@@ -21,6 +23,7 @@ if(this.props.actualInputValue === null){
  this.setState({infromationAboutCardNumberLenghtValidator: ""});
  this.MetodValidationLenght();
  this.MetodValidationCheckSum();
+ this.onButtonCardBrandValidation();
 }
  this.setState(state => ({valueToOutput: state.actualInputValue }));
  this.setState(state => ({previousActualInputValue: state.actualInputValue}));
@@ -36,7 +39,6 @@ if(this.props.actualInputValue.toString().length === this.state.lengthOfCardNumb
 }
 
 //algoritm luhn validate a check sum of vard number
-//TODO: on first validate checksum is showing false
 MetodValidationCheckSum(){
 this.setState({checkSum: luhn.validate(this.props.actualInputValue)}, () => {
  if(this.state.checkSum){
@@ -47,6 +49,21 @@ this.setState({checkSum: luhn.validate(this.props.actualInputValue)}, () => {
 });
 }
 
+//checking is first digit of card number is represent as some of card brand
+onButtonCardBrandValidation() {
+ this.setState({cardBrand: Array.from(this.props.actualInputValue.toString())}, () => {
+  if(this.state.cardBrand[0] === '4'){
+   this.setState({informationBrand: "VISA is brand of card"});
+  } else if(this.state.cardBrand[0] === '3'){
+   this.setState({informationBrand: "American Express is brand of card"});
+  } else if(this.state.cardBrand[0] === '5'){
+   this.setState({informationBrand: "MasterCard is brand of card"});
+  } else{
+   this.setState({informationBrand: "Card brand do not recognized"});
+  }
+ });
+}
+
 render(){
 return(
 <div>
@@ -55,6 +72,7 @@ return(
  <output>{this.state.infromationAboutCardNumberLenghtValidator}</output>
  <div><output>{this.state.informationCardNumberLenght}</output></div>
  <div><output>{this.state.informationCheckSum}</output></div>
+ <div><output>{this.state.informationBrand}</output></div>
  </div>
 </div>
 )
