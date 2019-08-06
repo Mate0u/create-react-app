@@ -16,9 +16,19 @@ const classes = useStyles();
 
 return (
 <div>
-<output>
- Placeholder
-</output>
+<AppBar color="primary" position="static">
+ <Toolbar>
+  <TypoGraphy variant="title" color="inherit">
+   QA world
+  </TypoGraphy>
+  <Button variant="contained" href="/" color="primary" className={classes.button}>
+   Home
+  </Button>
+  <Button variant="contained" href="/card" color="secondary" className={classes.button}>
+   Card
+  </Button>
+ </Toolbar>
+</AppBar>
 </div>
 );
 }

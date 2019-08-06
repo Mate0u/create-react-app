@@ -1,6 +1,6 @@
 import React from 'react';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
-import BannerUpper from './components/bannerUpper';
+import BannerUpper from './materialUIcomponents/navbar';
 import Home from "./components/homePage";
 import Card from './components/cardValidatorComponents/input';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
