@@ -2,6 +2,7 @@ import React from 'react';
 import DisplayCard from "./display";
 import PreviousDisplayCard from "./inputPrevious";
 import ValidatorsGuiButtons from "./validatorsGUI";
+import Button from '@material-ui/core/Button';
 
 class InputCard extends React.Component{
 
@@ -33,7 +34,7 @@ return (
 <div>
  <output>Input card number ></output>
  <input type="number" onChange={this.valueChange.bind(this)}/>
- <button onClick={this.onButtonClickSet.bind(this)}>Save</button>
+ <Button variant="contained" color="secondary" onClick={this.onButtonClickSet.bind(this)}>Save</Button>
  <output>{this.state.informationCardNumberLenght}</output>
  <DisplayCard cardNumberToDisplay = {this.state.actualInputValue}/>
  <PreviousDisplayCard cardNumberToDisplay = {this.state.previousActualInputValue}/>
