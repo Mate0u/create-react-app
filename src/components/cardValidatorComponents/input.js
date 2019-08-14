@@ -8,6 +8,9 @@ import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import NativeSelect from '@material-ui/core/NativeSelect';
 import InputBase from '@material-ui/core/InputBase';
+import Snackbar from '@material-ui/core/Snackbar';
+import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
 
 const BootstrapInput = withStyles(theme => ({
  root: {
@@ -39,8 +42,12 @@ const useStyles = makeStyles(theme => ({
  margin: {
   margin: theme.spacing(1),
  },
+ close: {
+  padding: theme.spacing(0.5),
+ },
 }));
 
+const open = React.useState(false);
 class InputCard extends React.Component {
 
  constructor(props) {
@@ -51,11 +58,37 @@ class InputCard extends React.Component {
    previousActualInputValue: null,
    cardMonth: null,
    cardYear: null,
+   previousCardMonth: null,
+   previousCardYear: null,
+   // open: false,
+   setOpen: false,
   };
+ }
+
+ handleClick() {
+  this.setState({ setOpen: true });
+
+  // setOpen(true);
+ }
+
+ handleClose(event, reason) {
+  if (reason === 'clickaway') {
+   return;
+  }
+  this.setState({ setOpen: false });
+  // setOpen(false);
  }
 
  valueChange(event) {
   this.setState({ actualInputValue: event.target.value });
+ }
+
+ valueMonthChange(event) {
+  this.setState({ cardMonth: event.target.value });
+ }
+
+ valueYearChange(event) {
+  this.setState({ cardYear: event.target.value });
  }
 
  onButtonClickSet() {
@@ -64,8 +97,16 @@ class InputCard extends React.Component {
   } else {
    this.setState({ informationCardNumberLenght: "" });
   }
+  //saving values for previous and actuall
+  //card number
   this.setState(state => ({ valueToOutput: state.actualInputValue }));
   this.setState(state => ({ previousActualInputValue: state.actualInputValue }));
+  //card month expire
+  this.setState(state => ({ valueToOutput: state.cardMonth }));
+  this.setState(state => ({ previousCardMonth: state.cardMonth }));
+  //card year expire
+  this.setState(state => ({ valueToOutput: state.actualInputValue }));
+  this.setState(state => ({ previousCardYear: state.cardYear }));
  }
 
  render() {
@@ -73,15 +114,15 @@ class InputCard extends React.Component {
    <form className={useStyles.root}>
     <div class="row">
      <div class="col-sm-3">
-      <FormControl onChange={this.valueChange.bind(this)} className={useStyles.margin}>
+      <FormControl onChange={this.valueChange.bind(this)} className={useStyles.margin} >
        <InputLabel>Input card number</InputLabel>
-       <BootstrapInput name="Number"/>
+       <BootstrapInput name="Number" />
       </FormControl>
      </div>
      <div class="col-sm-2">
       <FormControl className={useStyles.margin}>
        <InputLabel>Month</InputLabel>
-       <NativeSelect input={<BootstrapInput name="Month"/>}>
+       <NativeSelect onClick={this.valueMonthChange.bind(this)} input={<BootstrapInput name="Month" />}>
         <option value="" />
         <option value={1}>January</option>
         <option value={2}>February</option>
@@ -92,7 +133,7 @@ class InputCard extends React.Component {
      <div class="col-sm-2">
       <FormControl className={useStyles.margin}>
        <InputLabel>Year</InputLabel>
-       <NativeSelect input={<BootstrapInput name="Year"/>}>
+       <NativeSelect onClick={this.valueYearChange.bind(this)} input={<BootstrapInput name="Year" />}>
         <option value="" />
         <option value={2019}>2019</option>
         <option value={2020}>2020</option>
@@ -101,12 +142,36 @@ class InputCard extends React.Component {
       </FormControl>
      </div>
     </div>
-      <Button variant="contained" color="secondary" onClick={this.onButtonClickSet.bind(this)}>Save</Button>
-      <output>{this.state.informationCardNumberLenght}</output>
-      <DisplayCard cardNumberToDisplay={this.state.actualInputValue} monthToDisplay={this.state.cardMonth} yearToDisplay={this.state.cardYear} />
-      <PreviousDisplayCard cardNumberToDisplay={this.state.previousActualInputValue} monthToDisplay={this.state.cardMonth} yearToDisplay={this.state.cardYear}/>
-      <ValidatorsGuiButtons actualInputValue={this.state.actualInputValue} />
-    
+    <Button variant="contained" color="secondary" onClick={this.onButtonClickSet.bind(this)}>Save</Button>
+    {/* <output color="secondary">{this.state.informationCardNumberLenght}</output> */}
+    <Snackbar
+     anchorOrigin={{
+      vertical: 'bottom',
+      horizontal: 'left',
+     }}
+     open={open}
+     autoHideDuration={6000}
+     onClose={handleClose}
+     ContentProps={{
+      'aria-describedby': 'message-id',
+     }}
+     message={<span id="message-id">Note archived</span>}
+     action={[
+      <IconButton
+       key="close"
+       aria-label="close"
+       color="inherit"
+       className={useStyles.close}
+       onClick={handleClose}
+      >
+       <CloseIcon />
+      </IconButton>,
+     ]}
+    />
+    <DisplayCard cardNumberToDisplay={this.state.actualInputValue} monthToDisplay={this.state.cardMonth} yearToDisplay={this.state.cardYear} />
+    <PreviousDisplayCard cardNumberToDisplay={this.state.previousActualInputValue} monthToDisplay={this.state.previousCardMonth} yearToDisplay={this.state.previousCardYear} />
+    <ValidatorsGuiButtons actualInputValue={this.state.actualInputValue} />
+
    </form>
   )
  }
