@@ -2,16 +2,15 @@ import React from 'react';
 import DisplayCard from "./display";
 import PreviousDisplayCard from "./inputPrevious";
 import ValidatorsGuiButtons from "./validatorsGUI";
+import SnackbarError from "../../materialUIcomponents/test";
 import Button from '@material-ui/core/Button';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import NativeSelect from '@material-ui/core/NativeSelect';
 import InputBase from '@material-ui/core/InputBase';
-import Snackbar from '@material-ui/core/Snackbar';
-import IconButton from '@material-ui/core/IconButton';
-import CloseIcon from '@material-ui/icons/Close';
 
+//Style for material components Input
 const BootstrapInput = withStyles(theme => ({
  root: {
   'label + &': {
@@ -34,6 +33,7 @@ const BootstrapInput = withStyles(theme => ({
  },
 }))(InputBase);
 
+//Style for material rest component components
 const useStyles = makeStyles(theme => ({
  root: {
   display: 'flex',
@@ -47,7 +47,7 @@ const useStyles = makeStyles(theme => ({
  },
 }));
 
-const open = React.useState(false);
+// const open = React.useState(false);
 class InputCard extends React.Component {
 
  constructor(props) {
@@ -60,23 +60,7 @@ class InputCard extends React.Component {
    cardYear: null,
    previousCardMonth: null,
    previousCardYear: null,
-   // open: false,
-   setOpen: false,
   };
- }
-
- handleClick() {
-  this.setState({ setOpen: true });
-
-  // setOpen(true);
- }
-
- handleClose(event, reason) {
-  if (reason === 'clickaway') {
-   return;
-  }
-  this.setState({ setOpen: false });
-  // setOpen(false);
  }
 
  valueChange(event) {
@@ -93,7 +77,7 @@ class InputCard extends React.Component {
 
  onButtonClickSet() {
   if (this.state.actualInputValue === null) {
-   this.setState({ informationCardNumberLenght: "Please input card number!" });
+   return <SnackbarError />;
   } else {
    this.setState({ informationCardNumberLenght: "" });
   }
@@ -108,6 +92,14 @@ class InputCard extends React.Component {
   this.setState(state => ({ valueToOutput: state.actualInputValue }));
   this.setState(state => ({ previousCardYear: state.cardYear }));
  }
+ 
+ Greeting() {
+  if (this.state.actualInputValue === null) {
+   
+  } else {
+   return ;
+  }
+}
 
  render() {
   return (
@@ -142,32 +134,8 @@ class InputCard extends React.Component {
       </FormControl>
      </div>
     </div>
-    <Button variant="contained" color="secondary" onClick={this.onButtonClickSet.bind(this)}>Save</Button>
-    {/* <output color="secondary">{this.state.informationCardNumberLenght}</output> */}
-    <Snackbar
-     anchorOrigin={{
-      vertical: 'bottom',
-      horizontal: 'left',
-     }}
-     open={open}
-     autoHideDuration={6000}
-     onClose={handleClose}
-     ContentProps={{
-      'aria-describedby': 'message-id',
-     }}
-     message={<span id="message-id">Note archived</span>}
-     action={[
-      <IconButton
-       key="close"
-       aria-label="close"
-       color="inherit"
-       className={useStyles.close}
-       onClick={handleClose}
-      >
-       <CloseIcon />
-      </IconButton>,
-     ]}
-    />
+    <Button variant="contained" color="secondary" onClick={this.onButtonClickSet.bind(this)} onClickCapture={this.Greeting.bind(this)}>Save</Button>
+    {/* <Greeting /> */}
     <DisplayCard cardNumberToDisplay={this.state.actualInputValue} monthToDisplay={this.state.cardMonth} yearToDisplay={this.state.cardYear} />
     <PreviousDisplayCard cardNumberToDisplay={this.state.previousActualInputValue} monthToDisplay={this.state.previousCardMonth} yearToDisplay={this.state.previousCardYear} />
     <ValidatorsGuiButtons actualInputValue={this.state.actualInputValue} />
