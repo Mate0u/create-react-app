@@ -57,22 +57,32 @@ class InputCard extends React.Component {
       previousActualInputValue: null,
       cardMonth: null,
       cardYear: null,
+      cardBrand: null,
       previousCardMonth: null,
-      previousCardYear: null
+      previousCardYear: null,
+      previousCardBrand: null
     };
   }
 
+  //event inputing card number
   valueChange(event) {
     this.setState({ actualInputValue: event.target.value });
   }
 
+  //event selecting card expire month
   valueMonthChange(event) {
     this.setState({ cardMonth: event.target.value });
   }
 
+  //event selecting card expire year
   valueYearChange(event) {
     this.setState({ cardYear: event.target.value });
   }
+
+  //event selecting card brand
+  valueYearChange(event) {
+   this.setState({ cardBrand: event.target.value });
+ }
 
   onButtonClickSet() {
     if (this.state.actualInputValue === null) {
@@ -139,6 +149,22 @@ class InputCard extends React.Component {
                 <option value={2019}>2019</option>
                 <option value={2020}>2020</option>
                 <option value={2021}>2021</option>
+                <option value={2022}>2022</option>
+              </NativeSelect>
+            </FormControl>
+          </div>
+          <div class="col-sm-2">
+            <FormControl className={useStyles.margin}>
+              <InputLabel>Brand</InputLabel>
+              <NativeSelect
+                onClick={this.valueYearChange.bind(this)}
+                input={<BootstrapInput name="Brand" />}
+              >
+                <option value="" />
+                <option value={Visa}>2019</option>
+                <option value={MasterCard}>2020</option>
+                <option value={American Express}>2021</option>
+                <option value={2022}>2022</option>
               </NativeSelect>
             </FormControl>
           </div>

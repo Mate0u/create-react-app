@@ -1,14 +1,15 @@
 import React from "react";
 import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
 import Home from "./homePage";
-import Card from './cardValidatorAll';
+import Card from "./cardValidatorAll";
 
-export default () =>
-<Router>
+export default () => (
+  <Router>
     <div>
-    <Switch>
+      <Switch>
         <Route path="/" exact component={Home} />
         <Route path="/card" exact component={Card} />
-    </Switch>
+      </Switch>
     </div>
-</Router>
+  </Router>
+);
