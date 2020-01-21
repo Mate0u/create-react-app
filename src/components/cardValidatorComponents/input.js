@@ -60,7 +60,14 @@ class InputCard extends React.Component {
       cardBrand: null,
       previousCardMonth: null,
       previousCardYear: null,
-      previousCardBrand: null
+      previousCardBrand: null,
+      visa: null,
+      masterCard: null,
+      americanExpress: null,
+      otherBrand: null,
+      january: null,
+      february: null,
+      march: null
     };
   }
 
@@ -80,7 +87,7 @@ class InputCard extends React.Component {
   }
 
   //event selecting card brand
-  valueYearChange(event) {
+  valueBrandChange(event) {
    this.setState({ cardBrand: event.target.value });
  }
 
@@ -93,23 +100,24 @@ class InputCard extends React.Component {
     //saving values for previous and actuall
     //card number
     this.setState(state => ({ valueToOutput: state.actualInputValue }));
-    this.setState(state => ({
-      previousActualInputValue: state.actualInputValue
-    }));
+    this.setState(state => ({ previousActualInputValue: state.actualInputValue}));
     //card month expire
     this.setState(state => ({ valueToOutput: state.cardMonth }));
     this.setState(state => ({ previousCardMonth: state.cardMonth }));
     //card year expire
-    this.setState(state => ({ valueToOutput: state.actualInputValue }));
+    this.setState(state => ({ valueToOutput: state.cardYear}));
     this.setState(state => ({ previousCardYear: state.cardYear }));
-  }
+    //car brand
+    this.setState(state => ({ valueToOutput: state.cardBrand}));
+    this.setState(state => ({ previousCardBrand: state.cardBrand}));
+  };
 
   Greeting() {
     if (this.state.actualInputValue === null) {
     } else {
       return;
     }
-  }
+  };
 
   render() {
     return (
@@ -132,9 +140,9 @@ class InputCard extends React.Component {
                 input={<BootstrapInput name="Month" />}
               >
                 <option value="" />
-                <option value={1}>January</option>
-                <option value={2}>February</option>
-                <option value={3}>March</option>
+                <option value={this.state.january}>January</option>
+                <option value={this.state.february}>February</option>
+                <option value={this.state.march}>March</option>
               </NativeSelect>
             </FormControl>
           </div>
@@ -157,14 +165,14 @@ class InputCard extends React.Component {
             <FormControl className={useStyles.margin}>
               <InputLabel>Brand</InputLabel>
               <NativeSelect
-                onClick={this.valueYearChange.bind(this)}
+                onClick={this.valueBrandChange.bind(this)}
                 input={<BootstrapInput name="Brand" />}
               >
                 <option value="" />
-                <option value={Visa}>2019</option>
-                <option value={MasterCard}>2020</option>
-                <option value={American Express}>2021</option>
-                <option value={2022}>2022</option>
+                <option value={this.state.visa}>Visa</option>
+                <option value={this.state.masterCard}>MasterCard</option>
+                <option value={this.state.americanExpress}>American Express</option>
+                <option value={this.state.otherBrand}>Other</option>
               </NativeSelect>
             </FormControl>
           </div>
@@ -182,13 +190,15 @@ class InputCard extends React.Component {
           cardNumberToDisplay={this.state.actualInputValue}
           monthToDisplay={this.state.cardMonth}
           yearToDisplay={this.state.cardYear}
+          brandToDisplay={this.state.cardBrand}
         />
         <PreviousDisplayCard
           cardNumberToDisplay={this.state.previousActualInputValue}
           monthToDisplay={this.state.previousCardMonth}
           yearToDisplay={this.state.previousCardYear}
+          brandToDisplay={this.state.previousCardBrand}
         />
-        <ValidatorsGuiButtons actualInputValue={this.state.actualInputValue} />
+        <ValidatorsGuiButtons actualInputValue={this.state.actualInputValue} selectedBrand={this.state.cardBrand} />
       </form>
     );
   }

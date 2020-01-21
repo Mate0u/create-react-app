@@ -9,30 +9,44 @@ class validatorsGuiButtons extends React.Component {
     this.state = {
       lengthOfCardNumber: 16,
       checkSum: null,
-      cardBrand: null,
+      cardBrandCode: null,
+      selectedcardBrandCode: null,
       informationBrand: null,
       informationCheckSum: null,
       informationCardNumberLenght: null,
-      infromationAboutCardNumberLenghtValidator: null
+      infromationAboutCardNumberLenghtValidator: null,
+      informationCardComparing: null,
+      selectedBrand: null
     };
   }
 
-  onButtonClickSet() {
-    if (this.props.actualInputValue === null) {
-      this.setState({
-        infromationAboutCardNumberLenghtValidator:
-          "Please input card number first!"
-      });
-    } else {
-      this.setState({ infromationAboutCardNumberLenghtValidator: "" });
-      this.MetodValidationLenght();
-      this.MetodValidationCheckSum();
-      this.onButtonCardBrandValidation();
-    }
-    this.setState(state => ({ valueToOutput: state.actualInputValue }));
-    this.setState(state => ({
-      previousActualInputValue: state.actualInputValue
-    }));
+onButtonClickSet() {
+if (this.props.actualInputValue === null) {
+  this.setState({ infromationAboutCardNumberLenghtValidator: "Please input card number first!" });
+} else {
+  this.setState({ infromationAboutCardNumberLenghtValidator: "" });
+  this.MetodValidationLenght();
+  this.MetodValidationCheckSum();
+  this.onButtoncardBrandCodeValidation();
+  this.MetodBrandCompare();
+}
+this.setState(state => ({ valueToOutput: state.actualInputValue }));
+this.setState(state => ({ previousActualInputValue: state.actualInputValue }));
+}
+
+  // checking if brand from number is the same like selected 
+  MetodBrandCompare() {
+    this.setState(
+      { cardBrandCode: Array.from(this.props.actualInputValue.toString()) },
+      () => {
+        if (this.state.cardBrandCode[0] === "4" && this.props.selectedBrand === "Visa") {this.setState({ informationCardComparing: "Compering brand: success" });
+        } else if (this.state.cardBrandCode[0] === "3" && this.props.selectedBrand === "American Express") { this.setState({ informationCardComparing: "Compering brand: success" });
+        } else if (this.state.cardBrandCode[0] === "5" && this.props.selectedBrand === "MasterCard") { this.setState({ informationCardComparing: "Compering brand: success" });
+        } else if (this.state.cardBrandCode[0] !== "0" && this.props.selectedBrand === "Other") { this.setState({ informationCardComparing: "Compering brand: block" });  
+      } else { this.setState({ informationCardComparing: "Compering brand: failed" });
+        }
+      }
+    );
   }
 
   //Checking if card number have 16 digits
@@ -66,53 +80,51 @@ class validatorsGuiButtons extends React.Component {
   }
 
   //checking is first digit of card number is represent as some of card brand
-  onButtonCardBrandValidation() {
+  onButtoncardBrandCodeValidation() {
     this.setState(
-      { cardBrand: Array.from(this.props.actualInputValue.toString()) },
+      { cardBrandCode: Array.from(this.props.actualInputValue.toString()) },
       () => {
-        if (this.state.cardBrand[0] === "4") {
-          this.setState({ informationBrand: "VISA is brand of card" });
-        } else if (this.state.cardBrand[0] === "3") {
-          this.setState({
-            informationBrand: "American Express is brand of card"
-          });
-        } else if (this.state.cardBrand[0] === "5") {
-          this.setState({ informationBrand: "MasterCard is brand of card" });
-        } else {
-          this.setState({ informationBrand: "Card brand do not recognized" });
+        if (this.state.cardBrandCode[0] === "4") {this.setState({ informationBrand: "VISA is brand of card" });
+        } else if (this.state.cardBrandCode[0] === "3") { this.setState({informationBrand: "American Express is brand of card" });
+        } else if (this.state.cardBrandCode[0] === "5") { this.setState({ informationBrand: "MasterCard is brand of card" });
+        } else { this.setState({ informationBrand: "Card brand do not recognized" });
         }
       }
     );
   }
 
-  render() {
-    return (
+render() {
+return (
+<div>
+  <div>
+    <Button
+      variant="contained"
+      color="primary"
+      onClick={this.onButtonClickSet.bind(this)}
+    >
+      Validate
+    </Button>
       <div>
-        <div>
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={this.onButtonClickSet.bind(this)}
-          >
-            Validate
-          </Button>
-          <div>
-            <output>
-              {this.state.infromationAboutCardNumberLenghtValidator}
-            </output>
-          </div>
-          <div>
-            <output>{this.state.informationCardNumberLenght}</output>
-          </div>
-          <div>
-            <output>{this.state.informationCheckSum}</output>
-          </div>
-          <div>
-            <output>{this.state.informationBrand}</output>
-          </div>
-        </div>
+      <output>
+        {this.state.infromationAboutCardNumberLenghtValidator}
+      </output>
       </div>
-    );
-  }
+    <div>
+      <output>{this.state.informationCardNumberLenght}</output>
+    </div>
+    <div>
+      <output>{this.state.informationCheckSum}</output>
+    </div>
+    <div>
+      <output>{this.state.informationBrand}</output>
+    </div>
+    <div>
+      <output>{this.state.informationCardComparing}</output>
+    </div>
+  </div>
+</div>
+);
+}
+
 }
 export default validatorsGuiButtons;
