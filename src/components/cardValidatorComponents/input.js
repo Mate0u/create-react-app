@@ -2,13 +2,14 @@ import React from "react";
 import DisplayCard from "./display";
 import PreviousDisplayCard from "./inputPrevious";
 import ValidatorsGuiButtons from "./validatorsGUI";
-import SnackbarError from "../../materialUIcomponents/test";
+//import SnackbarError from "../../materialUIcomponents/snackBars"; //TODO
 import Button from "@material-ui/core/Button";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import InputLabel from "@material-ui/core/InputLabel";
 import FormControl from "@material-ui/core/FormControl";
 import NativeSelect from "@material-ui/core/NativeSelect";
 import InputBase from "@material-ui/core/InputBase";
+
 
 //Style for material components Input
 const BootstrapInput = withStyles(theme => ({
@@ -91,13 +92,13 @@ class InputCard extends React.Component {
    this.setState({ cardBrand: event.target.value });
  }
 
+  //saving values for previous and actuall
   onButtonClickSet() {
     if (this.state.actualInputValue === null) {
-      return <SnackbarError />;
+     // return <SnackbarError />; //TODO
     } else {
       this.setState({ informationCardNumberLenght: "" });
     }
-    //saving values for previous and actuall
     //card number
     this.setState(state => ({ valueToOutput: state.actualInputValue }));
     this.setState(state => ({ previousActualInputValue: state.actualInputValue}));

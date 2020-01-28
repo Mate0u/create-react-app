@@ -1,5 +1,6 @@
 import React from "react";
 import Button from "@material-ui/core/Button";
+import SnackBars from "../../materialUIcomponents/snackBars";
 
 const luhn = require("luhn");
 
@@ -16,19 +17,22 @@ class validatorsGuiButtons extends React.Component {
       informationCardNumberLenght: null,
       infromationAboutCardNumberLenghtValidator: null,
       informationCardComparing: null,
-      selectedBrand: null
+      selectedBrand: null,
+      value: null
     };
   }
 
 onButtonClickSet() {
 if (this.props.actualInputValue === null) {
   this.setState({ infromationAboutCardNumberLenghtValidator: "Please input card number first!" });
+  this.setState({value: false});
 } else {
   this.setState({ infromationAboutCardNumberLenghtValidator: "" });
   this.MetodValidationLenght();
   this.MetodValidationCheckSum();
   this.onButtoncardBrandCodeValidation();
   this.MetodBrandCompare();
+  this.setState({value: true});
 }
 this.setState(state => ({ valueToOutput: state.actualInputValue }));
 this.setState(state => ({ previousActualInputValue: state.actualInputValue }));
@@ -104,6 +108,7 @@ return (
     >
       Validate
     </Button>
+    <SnackBars value={this.state.value} inforamtionToPrint={this.state.informationCardNumberLenght}/>
       <div>
       <output>
         {this.state.infromationAboutCardNumberLenghtValidator}
