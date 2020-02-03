@@ -2,7 +2,6 @@ import React from "react";
 import DisplayCard from "./display";
 import PreviousDisplayCard from "./inputPrevious";
 import ValidatorsGuiButtons from "./validatorsGUI";
-//import SnackbarError from "../../materialUIcomponents/snackBars"; //TODO
 import Button from "@material-ui/core/Button";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import InputLabel from "@material-ui/core/InputLabel";
@@ -95,7 +94,6 @@ class InputCard extends React.Component {
   //saving values for previous and actuall
   onButtonClickSet() {
     if (this.state.actualInputValue === null) {
-     // return <SnackbarError />; //TODO
     } else {
       this.setState({ informationCardNumberLenght: "" });
     }

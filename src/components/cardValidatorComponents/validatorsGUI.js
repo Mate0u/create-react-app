@@ -18,54 +18,65 @@ class validatorsGuiButtons extends React.Component {
       infromationAboutCardNumberLenghtValidator: null,
       informationCardComparing: null,
       selectedBrand: null,
-      value: null
+      value1: null,
+      value2: null,
+      value3: null,
+      value4: null,
+      value5: null
     };
   }
 
 onButtonClickSet() {
 if (this.props.actualInputValue === null) {
   this.setState({ infromationAboutCardNumberLenghtValidator: "Please input card number first!" });
-  this.setState({value: false});
+  this.setState({value1: true});
 } else {
   this.setState({ infromationAboutCardNumberLenghtValidator: "" });
   this.MetodValidationLenght();
   this.MetodValidationCheckSum();
   this.onButtoncardBrandCodeValidation();
   this.MetodBrandCompare();
-  this.setState({value: true});
+  this.setState({value1: false});
 }
 this.setState(state => ({ valueToOutput: state.actualInputValue }));
 this.setState(state => ({ previousActualInputValue: state.actualInputValue }));
 }
 
-  // checking if brand from number is the same like selected 
-  MetodBrandCompare() {
-    this.setState(
-      { cardBrandCode: Array.from(this.props.actualInputValue.toString()) },
-      () => {
-        if (this.state.cardBrandCode[0] === "4" && this.props.selectedBrand === "Visa") {this.setState({ informationCardComparing: "Compering brand: success" });
-        } else if (this.state.cardBrandCode[0] === "3" && this.props.selectedBrand === "American Express") { this.setState({ informationCardComparing: "Compering brand: success" });
-        } else if (this.state.cardBrandCode[0] === "5" && this.props.selectedBrand === "MasterCard") { this.setState({ informationCardComparing: "Compering brand: success" });
-        } else if (this.state.cardBrandCode[0] !== "0" && this.props.selectedBrand === "Other") { this.setState({ informationCardComparing: "Compering brand: block" });  
-      } else { this.setState({ informationCardComparing: "Compering brand: failed" });
-        }
-      }
-    );
+// checking if brand from number is the same like selected 
+MetodBrandCompare() {
+this.setState(
+  { cardBrandCode: Array.from(this.props.actualInputValue.toString()) },
+  () => {
+    if (this.state.cardBrandCode[0] === "4" && this.props.selectedBrand === "Visa") {
+      this.setState({ informationCardComparing: "Compering brand: success"})
+      this.setState({value2: true});
+    } else if (this.state.cardBrandCode[0] === "3" && this.props.selectedBrand === "American Express") {
+       this.setState({ informationCardComparing: "Compering brand: success" });
+       this.setState({value2: true});
+    } else if (this.state.cardBrandCode[0] === "5" && this.props.selectedBrand === "MasterCard") {
+      this.setState({ informationCardComparing: "Compering brand: success" });
+      this.setState({value2: true});
+    } else if (this.state.cardBrandCode[0] !== "0" && this.props.selectedBrand === "Other") { 
+      this.setState({ informationCardComparing: "Compering brand: block" });  
+      this.setState({value2: true});
+  } else { 
+    this.setState({ informationCardComparing: "Compering brand: failed" });
+    this.setState({value2: false});
+    }
   }
+);
+}
 
   //Checking if card number have 16 digits
   MetodValidationLenght() {
-    if (
-      this.props.actualInputValue.toString().length ===
-      this.state.lengthOfCardNumber
-    ) {
-      this.setState({
-        informationCardNumberLenght: "Card Number has a good length"
-      });
+    if (this.props.actualInputValue.toString().length === this.state.lengthOfCardNumber) {
+      this.setState({informationCardNumberLenght: "Card Number has a good length"});
+      this.setState({value3: true});
     } else {
       this.setState({
         informationCardNumberLenght: "Card Number has not a good length"
       });
+      this.setState({value3: true});
     }
   }
 
@@ -76,8 +87,10 @@ this.setState(state => ({ previousActualInputValue: state.actualInputValue }));
       () => {
         if (this.state.checkSum) {
           this.setState({ informationCheckSum: "Card checksum is true" });
+          this.setState({value4: true});
         } else {
           this.setState({ informationCheckSum: "Card checksum is false" });
+          this.setState({value4: true});
         }
       }
     );
@@ -89,9 +102,13 @@ this.setState(state => ({ previousActualInputValue: state.actualInputValue }));
       { cardBrandCode: Array.from(this.props.actualInputValue.toString()) },
       () => {
         if (this.state.cardBrandCode[0] === "4") {this.setState({ informationBrand: "VISA is brand of card" });
+        this.setState({value5: true});
         } else if (this.state.cardBrandCode[0] === "3") { this.setState({informationBrand: "American Express is brand of card" });
+        this.setState({value5: true});
         } else if (this.state.cardBrandCode[0] === "5") { this.setState({ informationBrand: "MasterCard is brand of card" });
+        this.setState({value5: true});
         } else { this.setState({ informationBrand: "Card brand do not recognized" });
+        this.setState({value5: true});
         }
       }
     );
@@ -108,7 +125,12 @@ return (
     >
       Validate
     </Button>
-    <SnackBars value={this.state.value} inforamtionToPrint={this.state.informationCardNumberLenght}/>
+    <SnackBars value={this.state.value1} inforamtionToPrint={this.state.infromationAboutCardNumberLenghtValidator}/>
+    <SnackBars value={this.state.value2} inforamtionToPrint={this.state.informationCardComparing}/>
+    <SnackBars value={this.state.value3} inforamtionToPrint={this.state.informationCardNumberLenght}/>
+    <SnackBars value={this.state.value4} inforamtionToPrint={this.state.informationCheckSum}/>
+    <SnackBars value={this.state.value5} inforamtionToPrint={this.state.informationBrand}/>
+
       <div>
       <output>
         {this.state.infromationAboutCardNumberLenghtValidator}

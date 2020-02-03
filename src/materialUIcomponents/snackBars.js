@@ -4,8 +4,7 @@ import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 
 export default function SimpleSnackbar({value, inforamtionToPrint}) {
-  const [open, setOpen] = React.useState(value);
-console.log(value);
+  const [open, setOpen] = React.useState(false);
 
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
@@ -14,26 +13,25 @@ console.log(value);
     setOpen(false);
   };
 
-  return (
-    <div>
-      <Snackbar
-        anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'left',
-        }}
-        // check={check}
-        open={open}
-        autoHideDuration={6000}
-        onClose={handleClose}
-        message={inforamtionToPrint}
-        action={
-          <React.Fragment>
-            <IconButton size="small" aria-label="close" color="inherit" onClick={handleClose}>
-              <CloseIcon fontSize="small" />
-            </IconButton>
-          </React.Fragment>
-        }
-      />
-    </div>
-  );
+return (
+  <div>
+    <Snackbar
+      anchorOrigin={{
+        vertical: 'bottom',
+        horizontal: 'left',
+      }}
+      open={value}
+      autoHideDuration={6000}
+      onClose={handleClose}
+      message={inforamtionToPrint}
+      action={
+        <React.Fragment>
+          <IconButton size="small" aria-label="close" color="inherit" onClick={handleClose}>
+            <CloseIcon fontSize="small" />
+          </IconButton>
+        </React.Fragment>
+      }
+    />
+  </div>
+);
 }
