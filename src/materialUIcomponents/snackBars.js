@@ -22,13 +22,10 @@ const useStyles = makeStyles(theme => ({
 export default function SimpleSnackbar({value, severity, inforamtionToPrint}) {
   const [open, setOpen] = React.useState(false);
   const classes = useStyles();
+  console.log("value",value);
   
-  const handleClose = (event, reason) => {
-    if (reason === 'clickaway') {
-      return;
-    }
-    setOpen(false);
-  };
+  var status = value;
+  console.log("status",status);
 
 return (
   <div className={classes.root}>
@@ -37,11 +34,10 @@ return (
         vertical: 'top',
         horizontal: 'center',
       }}
-      open={value}
-      autoHideDuration={6000}
-      message={inforamtionToPrint}
+      open={status}
+      autoHideDuration={5}
     >
-      <Alert onClose={handleClose} severity={severity}>
+      <Alert severity={severity}>
       <output>{inforamtionToPrint}</output>
       </Alert>
     </Snackbar> 
